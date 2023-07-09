@@ -4,6 +4,7 @@ module.exports = {
     mode: process.env.NODE_ENV,
     entry: [
         path.resolve(__dirname, './assets/src/js/topics-page.js'),
+        path.resolve(__dirname, './assets/src/sass/topics-page.scss'),
     ],
     output: {
         path: path.resolve(__dirname, './assets/dist'),
@@ -19,7 +20,8 @@ module.exports = {
                         loader: 'file-loader',
                         options: { outputPath: 'css/', name: '[name].css'}
                     },
-                    'sass-loader'
+                    'sass-loader',
+                    'postcss-loader'
                 ]
             },
             {
