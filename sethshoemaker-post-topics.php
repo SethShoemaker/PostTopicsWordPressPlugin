@@ -17,8 +17,6 @@ define("SETHSHOEMAKER_POST_TOPIC_MAX_SLUG_LENGTH", 32);
 
 define("SETHSHOEMAKER_POST_TOPIC_DB_TABLE_NAME", $wpdb->prefix . "sethshoemaker_post_topics");
 
-global $wpdb;
-
 register_activation_hook( __FILE__, 'sethshoemaker_post_topics_activate' );
 
 function sethshoemaker_post_topics_activate() {
