@@ -9,9 +9,15 @@
     AuthorURI: https://github.com/SethShoemaker
 */
 
+define("SETHSHOEMAKER_POST_TOPIC_MIN_NAME_LENGTH", 1);
+define("SETHSHOEMAKER_POST_TOPIC_MAX_NAME_LENGTH", 32);
+
+define("SETHSHOEMAKER_POST_TOPIC_MIN_SLUG_LENGTH", 1);
+define("SETHSHOEMAKER_POST_TOPIC_MAX_SLUG_LENGTH", 32);
+
+define("SETHSHOEMAKER_POST_TOPIC_DB_TABLE_NAME", $wpdb->prefix . "sethshoemaker_post_topics");
+
 global $wpdb;
-global $sethshoemaker_post_topics_db_table_name;
-$sethshoemaker_post_topics_db_table_name = $wpdb->prefix . "sethshoemaker_post_topics";
 
 register_activation_hook( __FILE__, 'sethshoemaker_post_topics_activate' );
 
