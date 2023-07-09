@@ -1,0 +1,28 @@
+{
+  "name": "sethshoemaker-topics",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "prod": "NODE_ENV=production webpack ",
+    "build": "NODE_ENV=development webpack",
+    "build-watch": "NODE_ENV=development webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SethShoemaker/PostTopicsWordPressPlugin.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SethShoemaker/PostTopicsWordPressPlugin/issues"
+  },
+  "homepage": "https://github.com/SethShoemaker/PostTopicsWordPressPlugin#readme",
+  "devDependencies": {
+    "file-loader": "^6.2.0",
+    "tailwindcss": "^3.3.2",
+    "webpack": "^5.88.1",
+    "webpack-cli": "^5.1.4"
+  }
+}
