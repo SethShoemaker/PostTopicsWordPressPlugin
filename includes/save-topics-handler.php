@@ -18,8 +18,8 @@ function sethshoemaker_post_topics_save_handler( $post_id ) {
 	// Queries the database for each $topic_id, will return the function early if not found.
 	// Since there won't be any record with the id of a string, this also covers the case where the user enters a string
 	foreach ($topic_ids as $topic_id) {
-		$topic_id = (int)$topic_id;
-		$query = "SELECT id FROM " . SETHSHOEMAKER_POST_TOPIC_DB_TABLE_NAME . " WHERE id=$topic_id";
+		$topic_id_escaped = esc_sql($topic_id);
+		$query = "SELECT id FROM " . SETHSHOEMAKER_POST_TOPIC_DB_TABLE_NAME . " WHERE id='{$topic_id_escaped}'";
 		$result = $wpdb->get_row($query, ARRAY_A);
 
 		$topic_id_was_not_found = $result == null;
