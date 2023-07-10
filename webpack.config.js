@@ -5,6 +5,8 @@ module.exports = {
     entry: [
         path.resolve(__dirname, './assets/src/js/topics-page.js'),
         path.resolve(__dirname, './assets/src/sass/topics-page.scss'),
+
+        path.resolve(__dirname, './assets/src/js/topics-meta-box.js')
     ],
     output: {
         path: path.resolve(__dirname, './assets/dist'),
