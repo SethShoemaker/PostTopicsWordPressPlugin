@@ -1,3 +1,4 @@
+const appliedTopicsInput = document.querySelector("#sethshoemaker_post_topics_box input[name=sethshoemaker_post_topics_applied]");
 const topicCheckboxes = document.querySelectorAll("#sethshoemaker_post_topics_box #post-topics-list .post-topic-list-item input[type=checkbox]");
 
 setAppliedTopicsInput();
@@ -7,8 +8,6 @@ for (let i = 0; i < topicCheckboxes.length; i++) {
 
     topicCheckbox.addEventListener("click", setAppliedTopicsInput);
 }
-
-const appliedTopicsInput = document.querySelector("#sethshoemaker_post_topics_box input[name=sethshoemaker_post_topics_applied]");
 
 function setAppliedTopicsInput() {
     let newAppliedTopicsValue = [];
