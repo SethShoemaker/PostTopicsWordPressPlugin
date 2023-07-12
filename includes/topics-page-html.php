@@ -5,9 +5,9 @@ function sethshoemaker_post_topics_page_html(){ ?>
     <div class="wrap">
         <h1>Topics</h1>
         <div id="ajax-response"></div>
-        <div class="col-wrap">
+        <div class="grid lg:grid-cols-[1fr_2fr]">
             <div class="form-wrap">
-                <h2>Add New Topic</h2>
+                <h2 class="font-bold text-sm">Add New Topic</h2>
                 <form url="<?= esc_url( admin_url('admin-ajax.php') );  ?>" 
                     id="new-topic-form"
                     action="sethshoemaker_post_topics_add_new_topic" >
@@ -18,8 +18,12 @@ function sethshoemaker_post_topics_page_html(){ ?>
                             id="new-topic-name" 
                             aria-describedby="name-description"
                             aria-required="true"
-                            autofocus>
-                        <p class="name-description">Name must be 1-32 characters long</p>
+                            autofocus
+                            minlength="<?= SETHSHOEMAKER_POST_TOPIC_MIN_NAME_LENGTH ?>"
+                            maxlength="<?= SETHSHOEMAKER_POST_TOPIC_MAX_NAME_LENGTH ?>">
+                        <p class="name-description">
+                            Name must be <?= SETHSHOEMAKER_POST_TOPIC_MIN_NAME_LENGTH . "-" . SETHSHOEMAKER_POST_TOPIC_MAX_NAME_LENGTH ?> characters long
+                        </p>
                     </div>
                     <div class="form-field form-required term-slug-wrap">
                         <label for="new-topic-slug">Slug</label>
@@ -27,13 +31,17 @@ function sethshoemaker_post_topics_page_html(){ ?>
                             name="new-topic-slug" 
                             id="new-topic-slug"
                             aria-describedby="slug-description"
-                            aria-required="false">
-                        <p class="slug-description">Slug must be 1-32 characters long</p>
+                            aria-required="false"
+                            minlength="<?= SETHSHOEMAKER_POST_TOPIC_MIN_SLUG_LENGTH ?>"
+                            maxlength="<?= SETHSHOEMAKER_POST_TOPIC_MAX_SLUG_LENGTH ?>">
+                        <p class="slug-description">
+                            Slug must be <?= SETHSHOEMAKER_POST_TOPIC_MIN_SLUG_LENGTH . "-" . SETHSHOEMAKER_POST_TOPIC_MAX_SLUG_LENGTH ?> characters long
+                        </p>
                     </div>
                     <?php submit_button( __( 'Add New Topic', 'textdomain' ) ); ?>
                 </form>
             </div>
-            <div class="table-wrap">
+            <div class="lg:mx-5">
                 <?php 
                     $table = new SethShoemaker_Post_Topics_Topics_Table();
                     $table->prepare_items();
@@ -92,6 +100,12 @@ class SethShoemaker_Post_Topics_Topics_Table extends WP_List_Table {
             return __('Unknown column', 'textdomain');
         }
     }
+
+add_action('admin_enqueue_scripts', 'sethshoemaker_post_topics_page_styles');
+
+function sethshoemaker_post_topics_page_styles(){
+    $version_number = wp_get_theme()->get('Version');
+    wp_enqueue_style('sethshoemaker-post-topics-page-style', plugin_dir_url(__FILE__) . "../assets/dist/css/topics-page.css", array(), $version_number);
 }
 
 add_action('admin_enqueue_scripts', 'sethshoemaker_post_topics_page_scripts');
