@@ -56,50 +56,63 @@ function sethshoemaker_post_topics_page_html(){ ?>
 require_once(ABSPATH . 'wp-admin/includes/class-wp-list-table.php');
 class SethShoemaker_Post_Topics_Topics_Table extends WP_List_Table {
 
-    public function __construct() {
-        parent::__construct([
-            'singular' => __('Item', 'textdomain'),
-            'plural' => __('Items', 'textdomain'),
-            'ajax' => false
-        ]);
-    }
+    public function prepare_items() {
+        $this->items = $this->get_items();
 
-    public function get_columns() {
-        return [
-        'column_1' => __('Column 1', 'textdomain'),
-        'column_2' => __('Column 2', 'textdomain'),
-        'column_3' => __('Column 3', 'textdomain'),
+        $this->_column_headers = [
+            $this->columns, 
+            $this->hidden_values, 
+            $this->sortable_columns,
+            $this->primary_column
         ];
     }
 
-    public function prepare_items() {
-        $data = array(
-            array(
-                'column_1' => 'Data 1',
-                'column_2' => 'Data 2',
-                'column_3' => 'Data 3',
-            ),
-            array(
-                'column_1' => 'Data 4',
-                'column_2' => 'Data 5',
-                'column_3' => 'Data 6',
-            ),
+    public function get_items(): array {
+        global $wpdb;
+
+        $topics_query = '
+            SELECT 
+                id, 
+                name, 
+                slug,
+                (
+                    SELECT 
+                        COUNT(*)
+                    FROM ' . $wpdb->postmeta . '
+                    WHERE 
+                        meta_key="' . SETHSHOEMAKER_POST_TOPICS_META_KEY . '"
+                        AND meta_value LIKE CONCAT("%", id, "%")
+                ) AS count
+            FROM ' . SETHSHOEMAKER_POST_TOPIC_DB_TABLE_NAME;
+
+        return $wpdb->get_results($topics_query, ARRAY_A);
+    }
+
+    function column_name($item) {
+        $actions = array(
+            'edit' => "",
+            'delete' => "",
         );
 
-        $this->_column_headers = $this->get_column_info();
-        $this->items = $data;
+        return $item['name'] . $this->row_actions($actions);
     }
 
     public function column_default($item, $column_name) {
-        switch ($column_name) {
-            case 'column_1':
-            case 'column_2':
-            case 'column_3':
-            return $item[$column_name];
-            default:
-            return __('Unknown column', 'textdomain');
-        }
+        return $item[$column_name] ?? "null";
     }
+
+    public $columns = [
+        'name' => 'Name',
+        'slug' => 'Slug',
+        'count' => 'Count'
+    ];
+
+    public $hidden_values = [];
+
+    public $sortable_columns = [];
+
+    public $primary_column = "name";
+}
 
 add_action('admin_enqueue_scripts', 'sethshoemaker_post_topics_page_styles');
 
