@@ -5,7 +5,7 @@ function sethshoemaker_post_topics_page_html(){ ?>
     <div class="wrap">
         <h1>Topics</h1>
         <div id="ajax-response"></div>
-        <div class="grid lg:grid-cols-[1fr_2fr]">
+        <div class="grid lg:grid-cols-[1fr_3fr]">
             <div class="form-wrap">
                 <h2 class="font-bold text-sm">Add New Topic</h2>
                 <form url="<?= esc_url( admin_url('admin-ajax.php') );  ?>" 
