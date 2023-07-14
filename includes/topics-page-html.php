@@ -90,7 +90,7 @@ class SethShoemaker_Post_Topics_Topics_Table extends WP_List_Table {
 
     function column_name($item) {
         $actions = array(
-            'edit' => "",
+            'edit' => "<a href=\"" . admin_url("edit.php") . "?page=edit-topic&topicID=" . $item['id'] . "\">Edit</a>",
             'delete' => "",
         );
 

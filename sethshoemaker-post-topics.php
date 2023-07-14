@@ -36,9 +36,13 @@ if( is_admin() ){
     $is_admin_ajax = isset($pagenow) && $pagenow == "admin-ajax.php";
     $page_query_is_not_set = !isset($_GET["page"]);
     $is_post_topics_page = !$page_query_is_not_set && $_GET["page"] == "post-topics";
+    $is_edit_topic_page = !$page_query_is_not_set && $_GET["page"] == "edit-topic";
 
     if($is_edit_php && $is_post_topics_page){
         require_once(dirname(__FILE__) . "/includes/topics-page-html.php");
+    }
+    else if($is_edit_php && $is_edit_topic_page){
+        require_once(dirname(__FILE__) . "/includes/edit-topic-html.php");
     }
     else if($is_post_php || $is_post_new_php){
         require_once(dirname(__FILE__) . "/includes/add-topic-meta-box.php");
@@ -50,5 +54,6 @@ if( is_admin() ){
     }
     else if( $is_admin_ajax ){
         require_once(dirname(__FILE__) . "/includes/add-new-topic-handler.php");
+        require_once(dirname(__FILE__) . "/includes/edit-topic-handler.php");
     }
 }
