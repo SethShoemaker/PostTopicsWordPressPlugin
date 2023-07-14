@@ -27,5 +27,7 @@ function sethshoemaker_post_topics_save_handler( $post_id ) {
 			return;
 	}
 
+	$topic_ids = json_encode($topic_ids);
+
 	update_post_meta($post_id, SETHSHOEMAKER_POST_TOPICS_META_KEY, $topic_ids);
 }
