@@ -88,13 +88,20 @@ class SethShoemaker_Post_Topics_Topics_Table extends WP_List_Table {
         return $wpdb->get_results($topics_query, ARRAY_A);
     }
 
-    function column_name($item) {
+    function column_name($topic) {
         $actions = array(
-            'edit' => "<a href=\"" . admin_url("edit.php") . "?page=edit-topic&topicID=" . $item['id'] . "\">Edit</a>",
-            'delete' => "",
+            'edit' => "<a href=\"" . admin_url("edit.php") . "?page=edit-topic&topicID=" . $topic['id'] . "\">Edit</a>",
+            'delete' => "
+                <a class=\"topic-delete-button cursor-pointer\"
+                data-topic-id=\"" . $topic['id'] . "\"
+                data-topic-name=\"" . $topic['name'] . "\"
+                data-action-name=\"sethshoemaker_post_topics_delete_topic\"
+                data-url=\"" . esc_url(admin_url('admin-ajax.php')) . "\">
+                    Delete
+                </a>",
         );
 
-        return $item['name'] . $this->row_actions($actions);
+        return $topic['name'] . $this->row_actions($actions);
     }
 
     public function column_default($item, $column_name) {

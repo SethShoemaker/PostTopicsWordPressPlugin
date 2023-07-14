@@ -55,5 +55,6 @@ if( is_admin() ){
     else if( $is_admin_ajax ){
         require_once(dirname(__FILE__) . "/includes/add-new-topic-handler.php");
         require_once(dirname(__FILE__) . "/includes/edit-topic-handler.php");
+        require_once(dirname(__FILE__) . "/includes/delete-topic-handler.php");
     }
 }
