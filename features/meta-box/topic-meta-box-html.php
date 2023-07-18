@@ -9,12 +9,10 @@
 function sethshoemaker_post_topics_get_array_for_post($post_id): array{
     global $wpdb;
 
+    $topics = [];
+
     $all_topics_query = "SELECT * FROM " . SETHSHOEMAKER_POST_TOPIC_DB_TABLE_NAME;
     $all_topics = $wpdb->get_results($all_topics_query, ARRAY_A);
-
-    $applied_topic_ids = get_post_meta($post_id, SETHSHOEMAKER_POST_TOPICS_META_KEY, true);
-
-    $topics = [];
 
     foreach($all_topics as $topic)
         $topics[$topic["id"]] = array(
@@ -22,10 +20,20 @@ function sethshoemaker_post_topics_get_array_for_post($post_id): array{
             "is-applied" => false
         );
 
-    $applied_topic_ids_is_empty = gettype($applied_topic_ids) == "string";
-    if($applied_topic_ids_is_empty == false)
-        foreach($applied_topic_ids as $id)
-            $topics[$id]["is-applied"] = true;
+    $applied_topic_ids = get_post_meta($post_id, SETHSHOEMAKER_POST_TOPICS_META_KEY, true);
+
+    $applied_topic_ids_was_not_set = strlen($applied_topic_ids) == 0;
+    if ($applied_topic_ids_was_not_set)
+        return $topics;
+
+    $applied_topic_ids = json_decode($applied_topic_ids);
+
+    $applied_topic_ids_is_empty = count($applied_topic_ids) == 0;
+    if ($applied_topic_ids_is_empty)
+        return $topics;
+    
+    foreach($applied_topic_ids as $id)
+        $topics[$id]["is-applied"] = true;
 
     return $topics;
 }
