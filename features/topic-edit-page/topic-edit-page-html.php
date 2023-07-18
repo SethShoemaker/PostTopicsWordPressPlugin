@@ -77,6 +77,6 @@ add_action('admin_enqueue_scripts', 'sethshoemaker_post_topics_enqueue_edit_page
 
 function sethshoemaker_post_topics_enqueue_edit_page_assets(){
     $version_number = wp_get_theme()->get('Version');
-    wp_enqueue_style('sethshoemaker-post-topics-page-style', plugin_dir_url(__FILE__) . "../assets/dist/css/topics-page.css", array(), $version_number);
-    wp_enqueue_script('sethshoemaker-post-topics-edit-page-script', plugin_dir_url(__FILE__) . "../assets/dist/js/edit-topic-page.js", array('jquery'), $version_number, true);
+    wp_enqueue_style('sethshoemaker-post-topics-page-style', plugin_dir_url(__FILE__) . "../../assets/dist/css/topics-page.css", array(), $version_number);
+    wp_enqueue_script('sethshoemaker-post-topics-edit-page-script', plugin_dir_url(__FILE__) . "../../assets/dist/js/edit-topic-page.js", array('jquery'), $version_number, true);
 }

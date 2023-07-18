@@ -125,12 +125,12 @@ add_action('admin_enqueue_scripts', 'sethshoemaker_post_topics_page_styles');
 
 function sethshoemaker_post_topics_page_styles(){
     $version_number = wp_get_theme()->get('Version');
-    wp_enqueue_style('sethshoemaker-post-topics-page-style', plugin_dir_url(__FILE__) . "../assets/dist/css/topics-page.css", array(), $version_number);
+    wp_enqueue_style('sethshoemaker-post-topics-page-style', plugin_dir_url(__FILE__) . "../../assets/dist/css/topics-page.css", array(), $version_number);
 }
 
 add_action('admin_enqueue_scripts', 'sethshoemaker_post_topics_page_scripts');
 
 function sethshoemaker_post_topics_page_scripts(){
     $version_number = wp_get_theme()->get('Version');
-    wp_enqueue_script('sethshoemaker-post-topics-page-script', plugin_dir_url(__FILE__) . "../assets/dist/js/topics-page.js", array("jquery"), $version_number, true);
+    wp_enqueue_script('sethshoemaker-post-topics-page-script', plugin_dir_url(__FILE__) . "../../assets/dist/js/topics-page.js", array("jquery"), $version_number, true);
 }

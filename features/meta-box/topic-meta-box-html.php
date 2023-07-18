@@ -55,5 +55,5 @@ add_action('admin_enqueue_scripts', 'sethshoemaker_post_topics_page_scripts');
 
 function sethshoemaker_post_topics_page_scripts(){
     $version_number = wp_get_theme()->get('Version');
-    wp_enqueue_script('sethshoemaker-post-topics-page-script', plugin_dir_url(__FILE__) . "../assets/dist/js/topics-meta-box.js", array(), $version_number, true);
+    wp_enqueue_script('sethshoemaker-post-topics-page-script', plugin_dir_url(__FILE__) . "../../assets/dist/js/topics-meta-box.js", array(), $version_number, true);
 }
