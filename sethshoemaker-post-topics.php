@@ -21,6 +21,8 @@ define("SETHSHOEMAKER_POST_TOPIC_DB_TABLE_NAME", $wpdb->prefix . "sethshoemaker_
 define("SETHSHOEMAKER_POST_TOPICS_META_KEY", "sethshoemaker_post_topics_meta_key");
 
 define("SETHSHOEMAKER_POST_TOPICS_APPLIED_META_BOX_INPUT_NAME", "sethshoemaker_post_topics_applied");
+define("SETHSHOEMAKER_POST_TOPICS_TOPICS_FILTER_INPUT_NAME", "sethshoemaker_post_topics_filter");
+define("SETHSHOEMAKER_POST_TOPICS_TOPICS_FILTER_INPUT_DEFAULT_VALUE", 0);
 
 register_activation_hook( __FILE__, 'sethshoemaker_post_topics_activate' );
 
@@ -54,6 +56,9 @@ if( is_admin() ){
     }
     else if( $is_edit_php && $page_query_is_not_set ){
         require_once(dirname(__FILE__) . "/features/topics-column/topics-column.php");
+        require_once(dirname(__FILE__) . "/features/topics-filter/add-topics-filter.php");
+        require_once(dirname(__FILE__) . "/features/topics-filter/topics-filter-html.php");
+        require_once(dirname(__FILE__) . "/features/topics-filter/filter-by-topic-id.php");
     }
     else if( $is_admin_ajax ){
         require_once(dirname(__FILE__) . "/features/topic-index-page/add-new-topic-handler.php");
