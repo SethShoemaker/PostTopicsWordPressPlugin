@@ -30,7 +30,8 @@ function sethshoemaker_post_topics_propagate_topics_column($column_key, $post_id
     $topic_ids = json_decode($topic_ids);
 
     foreach($topic_ids as $topic_id){
-        $query = "SELECT name FROM " . SETHSHOEMAKER_POST_TOPIC_DB_TABLE_NAME . " WHERE id={$topic_id}";
+        $topic_id_escaped = esc_sql($topic_id);
+        $query = "SELECT name FROM " . SETHSHOEMAKER_POST_TOPIC_DB_TABLE_NAME . " WHERE id={$topic_id_escaped}";
         $topic = $wpdb->get_row($query, ARRAY_A);
 
         $topic_does_not_exist = $topic == null;
